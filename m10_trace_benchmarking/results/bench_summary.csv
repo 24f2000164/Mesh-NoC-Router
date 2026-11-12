@@ -1,0 +1,2 @@
+pattern,rate,pkt_len,total_packets,delivered_packets,delivery_rate_pct,avg_latency,min_latency,max_latency,throughput_flits_per_cycle
+uniform,0.2,3,268,268,100.0,6.02,5,10,1.7867

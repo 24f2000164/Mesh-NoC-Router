@@ -1,0 +1,66 @@
+VCD info: dumpfile sim/wh_router_tb.vcd opened for output.
+================================================================
+ M9 Wormhole-Switching Multi-Flit Mesh Regression (3x3 Grid)
+================================================================
+TEST 1: Single-flit packet (backward compat)
+EJECT: time=155000 tile=8 pid=1 flit_type=0
+[PASS] T1: Single-flit (0,0)->(2,2)               (Pkt 1: 1/1 flits received)
+TEST 2: Two-flit packet (HEAD+TAIL)
+EJECT: time=225000 tile=8 pid=2 flit_type=1
+EJECT: time=235000 tile=8 pid=2 flit_type=3
+[PASS] T2: Two-flit (0,0)->(2,2)                  (Pkt 2: 2/2 flits received)
+TEST 3: Three-flit packet (HEAD+BODY+TAIL)
+EJECT: time=285000 tile=7 pid=3 flit_type=1
+EJECT: time=295000 tile=7 pid=3 flit_type=2
+EJECT: time=305000 tile=7 pid=3 flit_type=3
+[PASS] T3: Three-flit (1,0)->(1,2)                (Pkt 3: 3/3 flits received)
+TEST 4: Five-flit packet
+EJECT: time=375000 tile=8 pid=4 flit_type=1
+EJECT: time=385000 tile=8 pid=4 flit_type=2
+EJECT: time=395000 tile=8 pid=4 flit_type=2
+EJECT: time=405000 tile=8 pid=4 flit_type=2
+EJECT: time=415000 tile=8 pid=4 flit_type=3
+[PASS] T4: Five-flit (0,0)->(2,2)                 (Pkt 4: 5/5 flits received)
+TEST 5: Back-to-back packets on same VC
+EJECT: time=465000 tile=5 pid=5 flit_type=1
+EJECT: time=475000 tile=5 pid=5 flit_type=2
+EJECT: time=485000 tile=5 pid=5 flit_type=3
+EJECT: time=495000 tile=5 pid=6 flit_type=1
+EJECT: time=505000 tile=5 pid=6 flit_type=2
+EJECT: time=515000 tile=5 pid=6 flit_type=3
+[PASS] T5a: Back-to-back packet 1                 (Pkt 5: 3/3 flits received)
+[PASS] T5b: Back-to-back packet 2                 (Pkt 6: 3/3 flits received)
+TEST 6: Simultaneous injection from two tiles
+EJECT: time=565000 tile=2 pid=7 flit_type=1
+EJECT: time=575000 tile=2 pid=7 flit_type=2
+EJECT: time=585000 tile=2 pid=7 flit_type=3
+EJECT: time=585000 tile=6 pid=8 flit_type=1
+EJECT: time=595000 tile=6 pid=8 flit_type=2
+EJECT: time=605000 tile=6 pid=8 flit_type=3
+[PASS] T6a: Concurrent tile 0->2                  (Pkt 7: 3/3 flits received)
+[PASS] T6b: Concurrent tile 2->6                  (Pkt 8: 3/3 flits received)
+TEST 7: Packet with backpressure (slow receiver)
+EJECT: time=675000 tile=8 pid=9 flit_type=1
+EJECT: time=685000 tile=8 pid=9 flit_type=2
+EJECT: time=695000 tile=8 pid=9 flit_type=3
+[PASS] T7: Backpressure stall & resume            (Pkt 9: 3/3 flits received)
+TEST 8: Reset recovery test
+EJECT: time=915000 tile=0 pid=10 flit_type=1
+EJECT: time=925000 tile=0 pid=10 flit_type=3
+[PASS] T8: Post-reset delivery                    (Pkt 10: 2/2 flits received)
+TEST 9: Multiple VCs carrying independent packets
+EJECT: time=985000 tile=8 pid=12 flit_type=1
+EJECT: time=995000 tile=8 pid=11 flit_type=1
+EJECT: time=1005000 tile=8 pid=12 flit_type=2
+EJECT: time=1015000 tile=8 pid=11 flit_type=2
+EJECT: time=1025000 tile=8 pid=12 flit_type=2
+EJECT: time=1035000 tile=8 pid=11 flit_type=2
+EJECT: time=1045000 tile=8 pid=12 flit_type=3
+EJECT: time=1055000 tile=8 pid=11 flit_type=3
+[PASS] T9a: VC0 packet                            (Pkt 11: 4/4 flits received)
+[PASS] T9b: VC1 packet                            (Pkt 12: 4/4 flits received)
+================================================================
+ Summary: 12 PASSED, 0 FAILED
+================================================================
+M9 ALL TESTS PASSED
+tb/wh_router_tb.sv:356: $finish called at 1065000 (1ps)

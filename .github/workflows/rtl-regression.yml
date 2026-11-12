@@ -1,0 +1,48 @@
+name: RTL Regression
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  simulation:
+    name: NoC RTL Simulation & Benchmarking
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y iverilog verilator make python3 python3-numpy python3-matplotlib
+
+      - name: Verify environment
+        run: |
+          bash scripts/check_environment.sh || true
+
+      - name: Run Milestone 1-8 Regressions
+        run: |
+          bash regress.sh
+
+      - name: Run Milestone 9 Wormhole Switching Tests
+        run: |
+          bash m9_wormhole_switching/run.sh
+
+      - name: Run Milestone 10 Trace-Driven Benchmarks
+        run: |
+          bash m10_trace_benchmarking/run.sh
+
+      - name: Upload Regression Logs & Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regression-logs-and-results
+          path: |
+            regress_logs/
+            m9_wormhole_switching/sim/*.vcd
+            m10_trace_benchmarking/results/*.csv
+            m10_trace_benchmarking/results/*.png

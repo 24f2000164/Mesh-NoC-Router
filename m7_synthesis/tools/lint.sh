@@ -14,7 +14,7 @@
 set -uo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
-V=${VERILATOR:-/c/Verilator/verilator-5.032/bin/verilator.exe}
+V=${VERILATOR:-$(command -v verilator 2>/dev/null || echo /c/Verilator/verilator-5.032/bin/verilator.exe)}
 RTL="rtl/noc_pkg.sv rtl/rr_arbiter.sv rtl/flit_fifo.sv rtl/vc_router.sv rtl/vc_mesh.sv"
 WAIVE="-Wno-IMPORTSTAR -Wno-DECLFILENAME"
 total=0
